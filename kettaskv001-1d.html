@@ -3129,7 +3129,7 @@ Lettermove(dir,str):=(
 Ketcindyjsfigure=0;
 Ketcindyjsscale=1;
 aalinestart=1;
-quline="Q01::fr(x^(2),7)+fr(y^(2),3)=1 について，次の問いに答えよ．	[1]:: 焦点 F の x 座標を求めよ．	[2]:: P が (sq(7),0) のとき，PF+PF' を求めよ．";
+quline="Q01::fr(x^(2),5)+fr(y^(2),2)=1 について，次の問いに答えよ．	[1]:: 焦点 F の x 座標を求めよ．	[2]:: P が (sq(5),0) のとき，PF+PF' を求めよ．";
 shline="Q01---	[1]x=	[2]PF+PF'=";
 sqline="01	2	2	2CR02	2	2	2CR03	2	2	2CR04	2	2	2CR05	2	2	2CR06	2	2	2CR07	2	2	2CR08	2	2	2CR09	2	2	2CR10	2	2	2CR11	2	2	2CR12	2	2	2CR13	2	2	2CR14	2	2	2CR15	2	2	2CR16	2	2	2CR17	2	2	2CR18	2	2	2CR19	2	2	2CR20	2	2	2CR21	2	2	2CR22	2	2	2CR23	2	2	2CR24	2	2	2CR25	2	2	2CR26	2	2	2CR27	2	2	2CR28	2	2	2CR29	2	2	2CR30	2	2	2CR31	2	2	2CR32	2	2	2CR33	2	2	2CR34	2	2	2CR35	2	2	2CR36	2	2	2CR37	2	2	2CR38	2	2	2CR39	2	2	2CR40	2	2	2CR41	2	2	2CR42	2	2	2";
 quLL=Line2list(quline);
@@ -5222,16 +5222,16 @@ if(stok==1,
 );
 
 Center=[100.499,7.648];
-Scale=3.781;
+Scale=4.014;
 Rbound=[120.426,0];
 tmp1=screenbounds();tmp1=[tmp1_2_1,0];
 Center=Center-Rbound+tmp1;
-if(nqu==2,  //add embed
+if(nqu>1,  //add embed
 Setwindow([-4,4],[-4,4]); 
-a1=7;
+a1=5;
 a1t="\sqrt{"+a1+"}";
 a1=sqrt(a1);
-b1=3;
+b1=2;
 b1t="\sqrt{"+b1+"}";
 b1=sqrt(b1);
 c1=sqrt(a1^2-b1^2);
@@ -5242,8 +5242,10 @@ pB1=[0,b1];
 pB2=-pB1;
 pF1=[c1,0];
 pF2=-pF1;
-pE=[-9,1];
+pE=[-3.5,-4.5];//[-9,1]
+);
 
+if(nqu==2,  //add embed
 op1="Size=12";
 
 Pointdata("1",Mvpt(pA1),[op1]);
@@ -5264,26 +5266,10 @@ Mvdrwxy();
 ); //add embed
 
 if(nqu>=3,  //add embed
-Setwindow([-4,4],[-4,4]); 
 
 Letter([T4+[1.5,0],"e","楕円は2定点F, F'からの距離の和が一定な点Pの軌跡"],["Color=[0,1,1,0]"]);
-Letter([T4+[1.5,-2.5],"e","入力後「Play」を押して4つの頂点を通れば正解"]);
-Letter([[77,-20],"e","入力後「Play」を押す．"],["Color=[1,1,0,0]"]);
-
-a1=7;
-a1t="\sqrt{"+a1+"}";
-a1=sqrt(a1);
-b1=3;
-b1t="\sqrt{"+b1+"}";
-b1=sqrt(b1);
-c1=sqrt(a1^2-b1^2);
-pA1=[a1,0];
-pA2=-pA1;
-pB1=[0,b1];
-pB2=-pB1;
-pF1=[c1,0];
-pF2=-pF1;
-pE=[-8.5,1];//-9
+Letter([T4+[1.5,-2.5],"e","入力後「Play」を押して4つの頂点を通れば正解"],["Color=[1,1,0,0]"]);
+//Letter([[77,-20],"e","入力後「Play」を押す．"],["Color=[1,1,0,0]"]);
 
 op1="Size=12";
 op2="Size=1.2";
@@ -5300,7 +5286,7 @@ Expr([Mvpt(pA1),"s5e5",a1t]);
 Expr([Mvpt(pA2),"s5w8","-"+a1t]);
 Expr([Mvpt(pB1),"n8w6",b1t]);
 Expr([Mvpt(pB2),"s8w8","-"+b1t]);
-Expr([Mvpt(pE),"e","PF+PF'="],[op2]);
+Expr([Mvpt(pE),"e","PF+PF'"],[op2]);
 //Expr([Mvpt(pE+[-0.1,1.5]),"e","\dfrac{x^2}{7}+\dfrac{y^2}{3}=1"],[op2]);
 //Expr([Mvpt(pA1),"n4e4","P"]);
 
@@ -5336,9 +5322,10 @@ mf(ss):=(
   if(ss>0,
 	Paramplot("1",tmp1,tmp2,["nodisp"]);
     Mvlist("1",gp1,["dr,1.5"]);
-
-	Expr([Mvpt(pE),"e","PF+PF'="+atex],[op2]);
-	Expr([Mvpt(pE+[-0.1,-1.2]),"e",text(Sprintf(dist(pP,pF1),2))+"+"+text(Sprintf(dist(pP,pF2),2))+"="+atex],[op2]);
+	Expr([Mvpt(pE),"e","PF+PF'"],[op2]);
+	Expr([Mvpt(pE+[0,-1]),"e",text(Sprintf(dist(pP,pF1),3))+"+"+text(Sprintf(dist(pP,pF2),3))+"="+text(Sprintf(2*a,3))+"="+atex],[op2]);
+//	Expr([Mvpt(pE),"e","PF+PF'="+atex],[op2]);
+//	Expr([Mvpt(pE+[-0.1,-1.2]),"e",text(Sprintf(dist(pP,pF1),2))+"+"+text(Sprintf(dist(pP,pF2),2))+"="+atex],[op2]);
 //	Expr([Mvpt(pE),"e","PF+PF'="+text(2*a)],[op2]);	
 //	Expr([Mvpt(pE+[-0.1,-1]),"e",text(Sprintf(dist(pP,pF1),2))+"+"+text(Sprintf(dist(pP,pF2),2))+"="+text(2*a)],[op2]);
 	if(ss<pi,
